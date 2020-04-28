@@ -14,7 +14,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 app.use(express.static("public"));
-console.log("MONGOOSE TEST", process.env.MONGODB_URI);
+//console.log("MONGOOSE TEST", process.env.MONGODB_URI);
 var mongoURI = process.env.MONGODB_URI ||"mongodb://localhost/budget"
 mongoose.connect(mongoURI, {
   useNewUrlParser: true,
@@ -22,7 +22,8 @@ mongoose.connect(mongoURI, {
 });
 
 // routes
-app.use(require("./routes/api.js"));
+app.use("/api", require("./routes/api.js"));
+app.use(require("./routes/htmlController"))
 
 app.listen(PORT, () => {
   console.log(`App running on port ${PORT}!`);
